@@ -39,3 +39,47 @@ function binarray(a) {
     }
     return 0;
   }
+
+  //WIP
+  function binarray(a) {
+    let ones = a.join("").match(/1/g);
+    //if there is only 1s or 0s in the array then the answer is 0
+    if(!ones || ones.length === a.length) return 0;
+    
+    //determine which is less common 1 or 0 and save it
+    console.log("m rep", ones.length, a.length/2)
+    let minority = ones.length < a.length/2 ? 1 : 0; //zero will be minority if even
+    
+    //find all of the less common indexes and save in an array
+    let indecies = [];
+    for(let i=0; i<a.length; i++){
+      if(a[i] === minority)indecies.push(i);
+    }
+    
+    //find the largest possible even array
+    //largest possible array size is the smaller of 1s or 0s x2
+    let size = 2*Math.min(ones.length,a.length - ones.length);
+    //array must be even length
+    if(size % 2 !== 0)size--;
+    console.log(a,minority,size, indecies)
+    
+    //for this array size
+     //check if the array capturing the 0th indicies and the size/2th indicies
+     // if so return the size
+    //loop through index array and then reduce the size by 2
+    while(size > 0){
+      for(let j=0; j+size/2<=indecies.length; j++){
+        console.log("J", j, "SIZE:", size);
+        if(indecies[j+size/2-1] - indecies[j] <= size){
+          let precede = j === 0 ? 0 : indecies[j] - indecies[j-1] -1;
+          let follow = j+size/2 === indecies.length ? 0 : indecies[j+size/2] - indecies[j+size/2-1]-1;
+          if(indecies[j+size/2-1] - indecies[j]  + precede + follow >= size){
+            return size;
+          }
+        }
+      }
+      size -= 2;
+    }
+   return 0;
+  }
+  

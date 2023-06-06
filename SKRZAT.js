@@ -84,3 +84,13 @@ function skrzat(type, input){
   }
   return 'From ' + type + ": " + input.toString() + " is " + output;
 }
+
+//a real solution to output that I did not come up with myself:
+// let input = -10;
+// let str = ""
+// while(input != 0){
+// 	let rem = input % -2 != 0 ? 1 : 0;
+//   str = rem.toString() + str;
+//   input = (input-rem)/-2;
+// }
+// return str
